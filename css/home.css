@@ -107,6 +107,7 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 10;
+  overflow-y: auto;
 }
 
 .modal-content {
@@ -115,14 +116,14 @@ body {
   border-radius: 10px;
   max-width: 90%;
   width: 600px;
-  overflow-y: auto;
 }
 
 .modal-video-wrapper {
   position: relative;
   width: 100%;
+  max-width: 800px;
+  margin: 0 auto 10px auto;
   padding-top: 56.25%;
-  margin-bottom: 10px;
 }
 
 #modal-video {
