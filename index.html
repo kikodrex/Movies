@@ -9,14 +9,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <script defer src="js/home.js"></script>
 </head>
-
 <body>
   <nav class="navbar">
     <img src="logo.png" alt="Rekta Movies Logo" />
     <div class="nav-links">
-      <a href="index.html">Home</a>
+      <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
       <input type="text" class="search-bar" placeholder="Search..." onfocus="openSearchModal()" />
-      <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <i class="fa-solid fa-circle-half-stroke"></i>
+      </button>
     </div>
   </nav>
 
@@ -24,36 +25,36 @@
     <h1 id="banner-title"></h1>
   </div>
 
-  <div class="row">
-    <h2>Trending Movies</h2>
+  <section class="row">
+    <h2><i class="fa-solid fa-film"></i> Trending Movies</h2>
     <div class="list" id="movies-list"></div>
-  </div>
+  </section>
 
-  <div class="row">
-    <h2>Trending TV Shows</h2>
+  <section class="row">
+    <h2><i class="fa-solid fa-tv"></i> Trending TV Shows</h2>
     <div class="list" id="tvshows-list"></div>
-  </div>
+  </section>
 
-  <div class="row">
-    <h2>Trending Anime</h2>
+  <section class="row">
+    <h2><i class="fa-solid fa-dragon"></i> Trending Anime</h2>
     <div class="list" id="anime-list"></div>
-  </div>
+  </section>
 
-  <div class="row">
-    <h2>Your Watchlist</h2>
+  <section class="row">
+    <h2><i class="fa-solid fa-heart"></i> Your Watchlist</h2>
     <div class="list" id="watchlist"></div>
-  </div>
+  </section>
 
   <div class="modal" id="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
+      <span class="close" onclick="closeModal()" aria-label="Close">&times;</span>
       <div class="modal-body">
         <img id="modal-image" src="" alt="" loading="lazy" />
         <div class="modal-text">
           <h2 id="modal-title"></h2>
           <div class="stars" id="modal-rating"></div>
           <p id="modal-description"></p>
-          <button onclick="addToWatchlist()">Add to Watchlist</button>
+          <button onclick="addToWatchlist()"><i class="fa-solid fa-bookmark"></i> Add to Watchlist</button>
         </div>
       </div>
       <div class="server-selector">
@@ -64,12 +65,12 @@
           <option value="player.videasy.net">Player.Videasy.net</option>
         </select>
       </div>
-      <iframe id="modal-video" width="100%" height="315" frameborder="0" allowfullscreen title=""></iframe>
+      <iframe id="modal-video" width="100%" height="315" frameborder="0" allowfullscreen title="Player"></iframe>
     </div>
   </div>
 
   <div class="search-modal" id="search-modal">
-    <span class="close" onclick="closeSearchModal()">&times;</span>
+    <span class="close" onclick="closeSearchModal()" aria-label="Close">&times;</span>
     <input type="text" id="search-input" placeholder="Search for a movie or show..." oninput="searchTMDBDebounced()" />
     <div class="results" id="search-results"></div>
   </div>
@@ -78,9 +79,9 @@
     <div class="footer-content">
       <p>&copy; 2025 Rekta Movies. All rights reserved.</p>
       <div class="footer-links">
-        <a href="#">Disclaimer</a>
-        <a href="#">About Us</a>
-        <a href="#">Contact Us</a>
+        <a href="#"><i class="fa-solid fa-shield"></i> Disclaimer</a>
+        <a href="#"><i class="fa-solid fa-circle-info"></i> About Us</a>
+        <a href="#"><i class="fa-solid fa-envelope"></i> Contact Us</a>
       </div>
     </div>
   </footer>
