@@ -2,15 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rekta Movies</title>
-  <link rel="stylesheet" href="css/home.css">
-  <link rel="preload" href="css/home.css" as="style">
-  <link rel="preload" href="js/home.js" as="script">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#000000">
-  <meta name="description" content="Watch trending movies, TV shows, and anime on Rekta Movies. Stream in high quality with multiple server options.">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <script defer src="js/home.js"></script>
 </head>
 
@@ -20,6 +16,7 @@
     <div class="nav-links">
       <a href="index.html">Home</a>
       <input type="text" class="search-bar" placeholder="Search..." onfocus="openSearchModal()" />
+      <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
     </div>
   </nav>
 
@@ -42,18 +39,23 @@
     <div class="list" id="anime-list"></div>
   </div>
 
+  <div class="row">
+    <h2>Your Watchlist</h2>
+    <div class="list" id="watchlist"></div>
+  </div>
+
   <div class="modal" id="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()" style="color: red;">&times;</span>
+      <span class="close" onclick="closeModal()">&times;</span>
       <div class="modal-body">
         <img id="modal-image" src="" alt="" loading="lazy" />
         <div class="modal-text">
           <h2 id="modal-title"></h2>
           <div class="stars" id="modal-rating"></div>
           <p id="modal-description"></p>
+          <button onclick="addToWatchlist()">Add to Watchlist</button>
         </div>
       </div>
-      
       <div class="server-selector">
         <label for="server">Change Server:</label>
         <select id="server" onchange="changeServer()">
@@ -67,7 +69,7 @@
   </div>
 
   <div class="search-modal" id="search-modal">
-    <span class="close" onclick="closeSearchModal()" style="color: red;">&times;</span>
+    <span class="close" onclick="closeSearchModal()">&times;</span>
     <input type="text" id="search-input" placeholder="Search for a movie or show..." oninput="searchTMDBDebounced()" />
     <div class="results" id="search-results"></div>
   </div>
