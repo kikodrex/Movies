@@ -98,20 +98,6 @@ body {
   flex-shrink: 0;
 }
 
-.skeleton {
-  width: 120px;
-  height: 180px;
-  background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.2s infinite;
-  border-radius: 5px;
-}
-
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
 .modal {
   position: fixed;
   top: 0; left: 0;
@@ -130,29 +116,68 @@ body {
   max-width: 90%;
   width: 600px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .modal-body {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column;
+  align-items: center;
 }
 
 .modal-body img {
-  width: 40%;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 5px;
 }
 
 .modal-text {
-  flex: 1;
+  margin-top: 10px;
 }
 
-.stars {
-  color: gold;
+.modal-text p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-align: justify;
+}
+
+.modal-content button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  margin: 10px auto;
+  border: none;
+  border-radius: 5px;
+  background: #007BFF;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background: #0056b3;
 }
 
 .server-selector {
   margin-top: 10px;
-  text-align: left;
+  text-align: center;
+}
+
+.server-selector select {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#modal-video {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: 8px;
+  margin-top: 15px;
 }
 
 .search-modal {
