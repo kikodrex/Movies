@@ -3,20 +3,40 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/original';
 let currentItem;
 
-async function fetchTrending(type) {
-  try {
-    const res = await fetch(`${BASE_URL}/trending/${type}/week?api_key=${API_KEY}`);
-    const data = await res.json();
-    return data.results;
-  } catch (e) {
-    console.error(`Error fetching trending ${type}:`, e);
-    return [];
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const newTheme = current === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  loadWatchlist();
+});
+
+function displayListSkeleton(containerId, count = 5) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  for (let i = 0; i < count; i++) {
+    const div = document.createElement('div');
+    div.className = 'skeleton';
+    div.style.width = '150px';
+    div.style.height = '225px';
+    div.style.marginRight = '10px';
+    container.appendChild(div);
   }
+}
+
+async function fetchTrending(type) {
+  const res = await fetch(`${BASE_URL}/trending/${type}/week?api_key=${API_KEY}`);
+  const data = await res.json();
+  return data.results;
 }
 
 async function fetchTrendingAnime() {
   let allResults = [];
-
   for (let page = 1; page <= 3; page++) {
     const res = await fetch(`${BASE_URL}/trending/tv/week?api_key=${API_KEY}&page=${page}`);
     const data = await res.json();
@@ -25,7 +45,6 @@ async function fetchTrendingAnime() {
     );
     allResults = allResults.concat(filtered);
   }
-
   return allResults;
 }
 
@@ -78,7 +97,6 @@ function changeServer() {
 function closeModal() {
   document.getElementById('modal').style.display = 'none';
   document.getElementById('modal-video').src = '';
-  document.getElementById('modal-video').title = '';
 }
 
 function openSearchModal() {
@@ -122,7 +140,42 @@ async function searchTMDB() {
   });
 }
 
+function addToWatchlist() {
+  let list = JSON.parse(localStorage.getItem('watchlist')) || [];
+  if (!list.find(i => i.id === currentItem.id)) {
+    list.push({
+      id: currentItem.id,
+      title: currentItem.title || currentItem.name,
+      poster: currentItem.poster_path,
+      media_type: currentItem.media_type
+    });
+    localStorage.setItem('watchlist', JSON.stringify(list));
+    alert('Added to watchlist!');
+    loadWatchlist();
+  } else {
+    alert('Already in watchlist');
+  }
+}
+
+function loadWatchlist() {
+  const container = document.getElementById('watchlist');
+  if (!container) return;
+  const list = JSON.parse(localStorage.getItem('watchlist')) || [];
+  container.innerHTML = '';
+  list.forEach(item => {
+    const img = document.createElement('img');
+    img.src = `${IMG_URL}${item.poster}`;
+    img.alt = item.title;
+    img.onclick = () => showDetails(item);
+    container.appendChild(img);
+  });
+}
+
 async function init() {
+  displayListSkeleton('movies-list');
+  displayListSkeleton('tvshows-list');
+  displayListSkeleton('anime-list');
+
   const movies = await fetchTrending('movie');
   const tvShows = await fetchTrending('tv');
   const anime = await fetchTrendingAnime();
