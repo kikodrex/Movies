@@ -49,27 +49,28 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal()" aria-label="Close">&times;</span>
 
-      <div class="modal-video-wrapper">
-        <iframe id="modal-video" allowfullscreen title="Player"></iframe>
-      </div>
-
       <div class="modal-body">
         <img id="modal-image" src="" alt="" loading="lazy" />
+
+        <div class="modal-video-wrapper">
+          <iframe id="modal-video" allowfullscreen title="Player"></iframe>
+        </div>
+
+        <div class="server-selector">
+          <label for="server">Change Server:</label>
+          <select id="server" onchange="changeServer()">
+            <option value="vidsrc.cc">Vidsrc.cc</option>
+            <option value="vidsrc.me">Vidsrc.me</option>
+            <option value="player.videasy.net">Player.Videasy.net</option>
+          </select>
+        </div>
+
         <div class="modal-text">
           <h2 id="modal-title"></h2>
           <div class="stars" id="modal-rating"></div>
           <p id="modal-description"></p>
           <button onclick="addToWatchlist()"><i class="fa-solid fa-bookmark"></i> Add to Watchlist</button>
         </div>
-      </div>
-
-      <div class="server-selector">
-        <label for="server">Change Server:</label>
-        <select id="server" onchange="changeServer()">
-          <option value="vidsrc.cc">Vidsrc.cc</option>
-          <option value="vidsrc.me">Vidsrc.me</option>
-          <option value="player.videasy.net">Player.Videasy.net</option>
-        </select>
       </div>
     </div>
   </div>
